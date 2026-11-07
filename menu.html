@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قائمة طعام المطعم - Digital Menu</title>
+    <style>
+        body { font-family: Tahoma, sans-serif; background-color: #f9f9f9; margin: 0; padding: 20px; }
+        h1 { text-align: center; color: #333; }
+        .menu-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+        .menu-item { background: #fff; border: 1px solid #ddd; border-radius: 8px; width: 250px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .price { color: #e67e22; font-weight: bold; font-size: 1.2em; }
+        .order-btn { background: #27ae60; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin-top: 10px; }
+        .order-btn:hover { background: #219653; }
+    </style>
+</head>
+<body>
+
+    <h1>قائمة الطعام الرقمية</h1>
+
+    <div class="menu-container">
+        <div class="menu-item">
+            <h3>برجر لحم ديلوكس</h3>
+            <p>لحم بقر طازج مع الجبن والخضار.</p>
+            <div class="price">8.99 $</div>
+            <button class="order-btn">إضافة للطلب</button>
+        </div>
+
+        <div class="menu-item">
+            <h3>بيتزا مارجريتا</h3>
+            <p>جبن موزاريلا إيطالي مع صلصة الطماطم.</p>
+            <div class="price">10.50 $</div>
+            <button class="order-btn">إضافة للطلب</button>
+        </div>
+    </div>
+
+</body>
+</html>
