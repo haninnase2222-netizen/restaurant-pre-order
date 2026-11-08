@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>تسجيل الدخول وإعداد الملف الشخصي</title>
+    <style>
+        body { font-family: Tahoma, sans-serif; background-color: #f4f6f8; padding: 30px; text-align: right; }
+        .auth-container { max-width: 400px; margin: 0 auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h2 { color: #0275d8; text-align: center; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+        button { width: 100%; background: #0275d8; color: white; border: none; padding: 12px; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #025aa5; }
+        .profile-card { display: none; margin-top: 20px; background: #e2f0cb; padding: 15px; border-radius: 5px; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <div class="auth-container" id="auth-form-container">
+        <h2>تسجيل الدخول / إنشاء حساب</h2>
+        <div class="form-group">
+            <label for="username">اسم المستخدم:</label>
+            <input type="text" id="username" placeholder="أدخل اسمك الكريم">
+        </div>
+        <div class="form-group">
+            <label for="email">البريد الإلكتروني:</label>
+            <input type="email" id="email" placeholder="example@domain.com">
+        </div>
+        <button onclick="saveProfile()">حفظ الملف الشخصي والدخول</button>
+    </div>
+
+    <div class="auth-container profile-card" id="profile-card">
+        <h2>أهلاً بكِ، <span id="display-name"></span>!</h2>
+        <p>تم إعداد ملفك الشخصي ومصادقتك بنجاح.</p>
+        <p><strong>البريد الإلكتروني:</strong> <span id="display-email"></span></p>
+        <button style="background: #d9534f; margin-top: 10px;" onclick="logout()">تسجيل الخروج</button>
+    </div>
+
+    <script>
+        function saveProfile() {
+            const name = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+
+            if(!name || !email) {
+                alert('الرجاء إدخال اسم المستخدم والبريد الإلكتروني بشكل صحيح!');
+                return;
+            }
+
+            document.getElementById('display-name').textContent = name;
+            document.getElementById('display-email').textContent = email;
+
+            document.getElementById('auth-form-container').style.display = 'none';
+            document.getElementById('profile-card').style.display = 'block';
+        }
+
+        function logout() {
+            document.getElementById('username').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('auth-form-container').style.display = 'block';
+            document.getElementById('profile-card').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>
