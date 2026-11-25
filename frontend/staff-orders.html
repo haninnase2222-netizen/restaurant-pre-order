@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Staff Order Queue</title>
+</head>
+<body>
+  <h1>Staff Order Queue</h1>
+  <ul id="orders-list"></ul>
+
+  <script>
+    const API_URL = "http://127.0.0.1:5000/api/orders";
+
+    function loadOrders() {
+      fetch(API_URL)
+        .then(res => res.json())
+        .then(orders => {
+          const list = document.getElementById("orders-list");
+          list.innerHTML = "";
+          orders.forEach(order => {
+            const li = document.createElement("li");
+            li.innerHTML = `
+              <strong>Order #${order.id}</strong> (${order.customer}): ${order.items} 
+              - Status: <b>${order.status}</b>
+              <button onclick="changeStatus(${order.id}, 'Preparing')">Preparing</button>
+              <button onclick="changeStatus(${order.id}, 'Ready')">Ready</button>
+            `;
+            list.appendChild(li);
+          });
+        });
+    }
+
+    function changeStatus(id, newStatus) {
+      fetch(`${API_URL}/${id}/status`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: newStatus })
+      }).then(() => loadOrders());
+    }
+
+    loadOrders();
+  </script>
+</body>
+</html>
