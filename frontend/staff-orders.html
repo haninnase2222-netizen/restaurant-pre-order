@@ -20,8 +20,8 @@
           orders.forEach(order => {
             const li = document.createElement("li");
             li.innerHTML = `
-              <strong>Order #${order.id}</strong> (${order.customer}): ${order.items} 
-              - Status: <b>${order.status}</b>
+              <strong>Order #${order.id} (${order.customer})</strong> -
+              Status: <b>${order.status}</b>
               <button onclick="changeStatus(${order.id}, 'Preparing')">Preparing</button>
               <button onclick="changeStatus(${order.id}, 'Ready')">Ready</button>
             `;
@@ -30,12 +30,16 @@
         });
     }
 
-    function changeStatus(id, newStatus) {
-      fetch(`${API_URL}/${id}/status`, {
+    function changeStatus(orderId, status) {
+      fetch(`${API_URL}/${orderId}/status`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: newStatus })
-      }).then(() => loadOrders());
+        body: JSON.stringify({ status: status })
+      })
+        .then(res => res.json())
+        .then(() => {
+          loadOrders();
+        });
     }
 
     loadOrders();
