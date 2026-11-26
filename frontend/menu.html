@@ -5,6 +5,11 @@
   <title>Digital Menu</title>
 </head>
 <body>
+  <h2>Ready Order Notifications</h2>
+  <ul id="ready-notifications"></ul>
+
+  <hr>
+
   <h1>Cafeteria Menu</h1>
   <ul id="menu"></ul>
 
@@ -19,6 +24,23 @@
           list.appendChild(li);
         });
       });
+
+    function loadReadyNotifications() {
+      fetch("http://127.0.0.1:5000/api/notifications")
+        .then(res => res.json())
+        .then(data => {
+          const notifList = document.getElementById("ready-notifications");
+          notifList.innerHTML = "";
+          (data.notifications || []).forEach(msg => {
+            const li = document.createElement("li");
+            li.textContent = msg;
+            notifList.appendChild(li);
+          });
+        });
+    }
+
+    loadReadyNotifications();
+    setInterval(loadReadyNotifications, 3000);
   </script>
 </body>
 </html>
